@@ -96,6 +96,7 @@
 			console.log(trackdata);
 			var energy = en / 20.0;
 			var valence = val / 20.0;
+			var mood = '';
 
 			// create playlist name based on Thayer's 2d Emotion Model
 			switch(Math.floor(energy/1.25)){
@@ -104,12 +105,15 @@
 				switch(Math.floor(valence*3.0/5.0)){
 					case(0):
 					g_name = "Sad Playlist (MPP)";
+					mood = "Sad";
 					break;
 					case(2):
 					g_name = "Peaceful Playlist (MPP)";
+					mood = "Peaceful";
 					break;
 					default:
 					g_name = "Sleepy Playlist (MPP)";
+					mood = "Sleepy";
 				}
 				break;
 				case(1):
@@ -117,12 +121,15 @@
 				switch(Math.floor(valence*3.0/5.0)){
 					case(0):
 					g_name = "Bored Playlist (MPP)";
+					mood = "Bored";
 					break;
 					case(2):
 					g_name = "Relaxed Playlist (MPP)";
+					mood = "Relaxed";
 					break;
 					default:
 					g_name = "Calm Playlist (MPP)";
+					mood = "Calm";
 				}
 				break;
 				case(2):
@@ -130,12 +137,15 @@
 				switch(Math.floor(valence*3.0/5.0)){
 					case(0):
 					g_name = "Nervous Playlist (MPP)";
+					mood = "Nervous";
 					break;
 					case(2):
 					g_name = "Pleased Playlist (MPP)";
+					mood = "Pleased";
 					break;
 					default:
 					g_name = "Calm Playlist (MPP)";
+					mood = "Calm";
 				}
 				break;
 				default:
@@ -143,17 +153,22 @@
 				switch(Math.floor(valence*3.0/5.0)){
 					case(0):
 					g_name = "Angry Playlist (MPP)";
+					mood = "Angry";
 					break;
 					case(2):
 					g_name = "Happy Playlist (MPP)";
+					mood = "Happy";
 					break;
 					default:
 					g_name = "Excited Playlist (MPP)";
+					mood = "Excited";
 				}
 			}
 
 			console.log("G_NAME: ");
 			console.log(g_name);
+
+			$("#mood").text(mood);
 
 			var dist = [];
 			trackdata.forEach(function(track, index){
