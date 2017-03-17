@@ -111,6 +111,10 @@
 					g_name = "Peaceful Playlist (MPP)";
 					mood = "Peaceful";
 					break;
+					case(3):
+					g_name = "Peaceful Playlist (MPP)";
+					mood = "Peaceful";
+					break;
 					default:
 					g_name = "Sleepy Playlist (MPP)";
 					mood = "Sleepy";
@@ -124,6 +128,10 @@
 					mood = "Bored";
 					break;
 					case(2):
+					g_name = "Relaxed Playlist (MPP)";
+					mood = "Relaxed";
+					break;
+					case(3):
 					g_name = "Relaxed Playlist (MPP)";
 					mood = "Relaxed";
 					break;
@@ -143,6 +151,10 @@
 					g_name = "Pleased Playlist (MPP)";
 					mood = "Pleased";
 					break;
+					case(3):
+					g_name = "Pleased Playlist (MPP)";
+					mood = "Pleased";
+					break;
 					default:
 					g_name = "Calm Playlist (MPP)";
 					mood = "Calm";
@@ -156,6 +168,10 @@
 					mood = "Angry";
 					break;
 					case(2):
+					g_name = "Happy Playlist (MPP)";
+					mood = "Happy";
+					break;
+					case(3):
 					g_name = "Happy Playlist (MPP)";
 					mood = "Happy";
 					break;
