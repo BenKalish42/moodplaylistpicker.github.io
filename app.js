@@ -100,49 +100,60 @@
 			// create playlist name based on Thayer's 2d Emotion Model
 			switch(Math.floor(energy/1.25)){
 				case(0):
+				console.log("case 0");
 				switch(Math.floor(valence*3.0/5.0)){
-					case(0): g_name = "Sad Playlist (MPP)";
+					case(0):
+					g_name = "Sad Playlist (MPP)";
 					break;
-					case(1): g_name = "Sleepy Playlist (MPP)";
+					case(2):
+					g_name = "Peaceful Playlist (MPP)";
 					break;
-					case(2): g_name = "Peaceful Playlist (MPP)";
-					break;
+					default:
+					g_name = "Sleepy Playlist (MPP)";
 				}
 				break;
 				case(1):
 				console.log("case 1");
 				switch(Math.floor(valence*3.0/5.0)){
-					case(0): g_name = "Bored Playlist (MPP)";
+					case(0):
+					g_name = "Bored Playlist (MPP)";
 					break;
-					case(1): g_name = "Calm Playlist (MPP)";
+					case(2):
+					g_name = "Relaxed Playlist (MPP)";
 					break;
-					case(2): g_name = "Relaxed Playlist (MPP)";
-					break;
+					default:
+					g_name = "Calm Playlist (MPP)";
 				}
 				break;
 				case(2):
 				console.log("case 2");
 				switch(Math.floor(valence*3.0/5.0)){
-					case(0): g_name = "Nervous Playlist (MPP)";
+					case(0):
+					g_name = "Nervous Playlist (MPP)";
 					break;
-					case(1): g_name = "Calm Playlist (MPP)";
+					case(2):
+					g_name = "Pleased Playlist (MPP)";
 					break;
-					case(2): g_name = "Pleased Playlist (MPP)";
-					break;
+					default:
+					g_name = "Calm Playlist (MPP)";
 				}
 				break;
 				default:
 				console.log("case default");
 				switch(Math.floor(valence*3.0/5.0)){
-					case(0): g_name = "Angry Playlist (MPP)";
+					case(0):
+					g_name = "Angry Playlist (MPP)";
 					break;
-					case(1): g_name = "Excited Playlist (MPP)";
+					case(2):
+					g_name = "Happy Playlist (MPP)";
 					break;
-					case(2): g_name = "Happy Playlist (MPP)";
-					break;
+					default:
+					g_name = "Excited Playlist (MPP)";
 				}
-				break;
 			}
+
+			console.log("G_NAME: ");
+			console.log(g_name);
 
 			var dist = [];
 			trackdata.forEach(function(track, index){
