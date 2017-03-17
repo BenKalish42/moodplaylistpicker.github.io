@@ -52,7 +52,7 @@
 
 	if (location.host == 'localhost:8880') {
 		client_id = '0e6b495236434fdcb11b1fad2ede1c5a';
-		redirect_uri = 'https://localhost:8880/callback.html';
+		redirect_uri = 'localhost:8880/callback.html';
 	} else {
 		client_id = '0e6b495236434fdcb11b1fad2ede1c5a';
 		redirect_uri = 'https://moodplaylistpicker.github.io/callback.html';
@@ -65,8 +65,9 @@
 			'&redirect_uri=' + encodeURIComponent(redirect_uri);
 		localStorage.setItem('createplaylist-tracks', JSON.stringify(g_tracks));
 		localStorage.setItem('createplaylist-name', g_name);
+		callback(url);
 
-		var w = window.open(url, 'asdf', 'WIDTH=400,HEIGHT=500');
+		// var w = window.open(url, 'asdf', 'WIDTH=400,HEIGHT=500');
 	}
 
 	var parseCSV = function(file, callback) {
@@ -177,7 +178,9 @@
 			generatePlaylist($('#energy-slider').val(), $('#valence-slider').val());
 		});
 		$('#start').click(function() {
-			doLogin(function() {});
+			doLogin(function(url) {
+				var w = window.open(url, 'asdf', 'WIDTH=400,HEIGHT=500');
+			});
 		});
 		$('#energy-slider').mouseup(function(){
 			$('#energy-val').text($(this).val());
