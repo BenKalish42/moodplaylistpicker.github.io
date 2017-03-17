@@ -50,12 +50,12 @@
 	var redirect_uri = '';
 
 
-	if (location.host == 'localhost:8000') {
-		client_id = 'd37a9e88667b4fb3bc994299de2a52bd';
-		redirect_uri = 'http://localhost:8000/callback.html';
+	if (location.host == 'localhost:8880') {
+		client_id = '0e6b495236434fdcb11b1fad2ede1c5a';
+		redirect_uri = 'https://localhost:8880/callback.html';
 	} else {
-		client_id = '6f9391eff32647baa44b1a700ad4a7fc';
-		redirect_uri = 'http://lab.possan.se/playlistcreator-example/callback.html';
+		client_id = '0e6b495236434fdcb11b1fad2ede1c5a';
+		redirect_uri = 'https://moodplaylistpicker.github.io/callback.html';
 	}
 
 	var doLogin = function(callback) {
@@ -65,6 +65,7 @@
 			'&redirect_uri=' + encodeURIComponent(redirect_uri);
 		localStorage.setItem('createplaylist-tracks', JSON.stringify(g_tracks));
 		localStorage.setItem('createplaylist-name', g_name);
+
 		var w = window.open(url, 'asdf', 'WIDTH=400,HEIGHT=500');
 	}
 
@@ -94,7 +95,36 @@
 			console.log(trackdata);
 			var energy = en / 20.0;
 			var valence = val / 20.0;
-			dist = [];
+
+			// create playlist name based on Thayer's 2d Emotion Model
+			switch(Math.floor(energy/1.25)){
+				case(0):
+				switch(Math.floor(valence*3.0/5.0)){
+					case(0): g_name = "Sad Playlist (MPP)";
+					case(1): g_name = "Sleepy Playlist (MPP)";
+					case(2): g_name = "Peaceful Playlist (MPP)";
+				}
+				case(1):
+				switch(Math.floor(valence*3.0/5.0)){
+					case(0): g_name = "Bored Playlist (MPP)";
+					case(1): g_name = "Calm Playlist (MPP)";
+					case(2): g_name = "Relaxed Playlist (MPP)";
+				}
+				case(2):
+				switch(Math.floor(valence*3.0/5.0)){
+					case(0): g_name = "Nervous Playlist (MPP)";
+					case(1): g_name = "Calm Playlist (MPP)";
+					case(2): g_name = "Pleased Playlist (MPP)";
+				}
+				default:
+				switch(Math.floor(valence*3.0/5.0)){
+					case(0): g_name = "Angry Playlist (MPP)";
+					case(1): g_name = "Excited Playlist (MPP)";
+					case(2): g_name = "Happy Playlist (MPP)";
+				}
+			}
+
+			var dist = [];
 			trackdata.forEach(function(track, index){
 				// Calculate euclidean distance between energy/valence
 				dist[index] = Math.sqrt(Math.pow((valence - track[1]), 2) + Math.pow((energy - track[2]), 2));
@@ -113,7 +143,9 @@
 				console.log("Came back with tracks:");
 				console.log(tracks);
 				var txt = '';
+				g_tracks = [];
 				tracks.forEach(function(found){
+					g_tracks.push(found.uri);
 					txt += '<div class="media">' +
 						'<a class="pull-left" href="#"><img class="media-object" src="' + found.cover_url + '" /></a>' +
 						'<div class="media-body">' +
@@ -123,7 +155,8 @@
 						'</div>' +
 						'</div>\n';
 				});
-
+				console.log("G_Tracks: ");
+				console.log(g_tracks);
 				$('#debug').html(txt);
 			});
 		});

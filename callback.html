@@ -91,6 +91,9 @@ function doit() {
 	g_name = localStorage.getItem('createplaylist-name');
 	g_tracks = JSON.parse(localStorage.getItem('createplaylist-tracks'));
 
+	console.log("G_Tracks: ");
+	console.log(g_tracks);
+
 	console.log('got args', args);
 
 	if (typeof(args['access_token']) != 'undefined') {
