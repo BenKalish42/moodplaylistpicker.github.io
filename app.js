@@ -97,7 +97,7 @@
 			dist = [];
 			trackdata.forEach(function(track, index){
 				// Calculate euclidean distance between energy/valence
-				dist[index] = Math.sqrt(Math.pow((energy - track[1]), 2) + Math.pow((valence - track[2]), 2));
+				dist[index] = Math.sqrt(Math.pow((valence - track[1]), 2) + Math.pow((energy - track[2]), 2));
 			});
 
 			var track_ids = [];
