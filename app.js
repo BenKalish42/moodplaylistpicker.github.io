@@ -102,27 +102,46 @@
 				case(0):
 				switch(Math.floor(valence*3.0/5.0)){
 					case(0): g_name = "Sad Playlist (MPP)";
+					break;
 					case(1): g_name = "Sleepy Playlist (MPP)";
+					break;
 					case(2): g_name = "Peaceful Playlist (MPP)";
+					break;
 				}
+				break;
 				case(1):
+				console.log("case 1");
 				switch(Math.floor(valence*3.0/5.0)){
 					case(0): g_name = "Bored Playlist (MPP)";
+					break;
 					case(1): g_name = "Calm Playlist (MPP)";
+					break;
 					case(2): g_name = "Relaxed Playlist (MPP)";
+					break;
 				}
+				break;
 				case(2):
+				console.log("case 2");
 				switch(Math.floor(valence*3.0/5.0)){
 					case(0): g_name = "Nervous Playlist (MPP)";
+					break;
 					case(1): g_name = "Calm Playlist (MPP)";
+					break;
 					case(2): g_name = "Pleased Playlist (MPP)";
+					break;
 				}
+				break;
 				default:
+				console.log("case default");
 				switch(Math.floor(valence*3.0/5.0)){
 					case(0): g_name = "Angry Playlist (MPP)";
+					break;
 					case(1): g_name = "Excited Playlist (MPP)";
+					break;
 					case(2): g_name = "Happy Playlist (MPP)";
+					break;
 				}
+				break;
 			}
 
 			var dist = [];
