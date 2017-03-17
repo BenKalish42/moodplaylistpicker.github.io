@@ -1,0 +1,96 @@
+<html>
+<head>
+<script type="text/javascript" src="https://code.jquery.com/jquery-1.11.1.js"></script>
+<script type="text/javascript" src="jquery.csv.min.js"></script>
+<script type="text/javascript" src="app.js"></script>
+<link rel="stylesheet" href="https://netdna.bootstrapcdn.com/bootstrap/3.1.1/css/bootstrap.min.css" />
+<link rel="stylesheet" href="https://netdna.bootstrapcdn.com/bootstrap/3.1.1/css/bootstrap-theme.min.css" />
+<link rel="stylesheet" href="rangeselect.css" />
+<style type="text/css">
+	.jumbotron {
+		background-color: #333;
+		color: #fff;
+	}
+	.jumbotron p {
+		color: #aaa;
+	}
+	.jumbotron a {
+		color: #fff;
+	}
+</style>
+</head>
+<body onload="startApp()">
+
+	<!-- Main jumbotron for a primary marketing message or call to action -->
+	<div class="jumbotron">
+		<div class="container">
+			<h2>Mood Picker Playlist</h2>
+			<h4>Ben Kalish, Susie Riley, Yi Zhang</h4>
+			<h5>benkalish@u.northwestern.edu  susieriley@u.northwestern.edu  yizhang@u.northwestern.edu</h5> 
+
+			<h4>
+			EECS 352 - Machine Perception of Music and Audio with Bryan Pardo
+			</h4>
+			<h4>
+			Northwestern University
+			</h4>
+			<p>
+				Browse the sourcecode on <a href="https://github.com/MoodPlaylistPicker/moodplaylistpicker.github.io">GitHub</a>
+			</p>
+		</div>
+		</div>
+
+	<div class="container">
+		<!-- Example row of columns -->
+		<h1>
+			About
+		</h1>
+		<p>
+			Our Mood Playlist Picker generates playlists according to the user’s mood. The user quantifies the mood for which they want to generate a playlist according to two scales: valence and energy. Valence defines how positive or negative the feeling of the playlist should be, and energy specifies the energy level of the song. When the user inputs the desired valence and energy, our application returns to them a playlist that matches their specified mood.
+			</p>
+			<p>
+
+			In order to determine the valence and energy scores, we trained a model on a preexisting dataset. The dataset we used was a 10,000 song subset of the Million Song Dataset (MSD). Each entry in the MSD has an Echo Nest ID. AcousticBrainz labs provides a mapping from the MSD Echo Nest ID to each track,s Spotify ID, if it exists on Spotify. The All Music Guide provides genre labels for each track. Spotipy allowed us to use the Spotify API in python. Using these tools, we filtered for all the songs in the MSD subset labeled Pop/Rock that are available in the US on Spotify. We collected user-rated valence and energy scores for 200 randomly selected songs in the remaining subset by surveying Northwestern students. We used these scores to train our model. 
+
+</p>
+<p>
+			Previous work in music mood classifying on an Arousal-Valence scale has shown that Support Vector Regression (SVR) yields the best results. Therefore, we have chosen to train an SVR model for each dimension (Arousal, Valence). Our training set contains 200 A-V labeled songs and the unlabeled set contains 500 songs. For each song, we obtain the following 9 Spotify features: tempo, key, loudness, mode, danceability, speechiness, acousticness, instumentalness and liveness.
+			</p>
+			<p>
+
+			In training our model, we based our evaluation on the 5-fold cross validation performance, measured by mean squared error, as well as the training R^2. We optimize the SVR models primarily by making changes to the kernel choice and amount of regularization. By setting the amount of regularization constant, we have found that RBF kernels achieve the highest training R^2, but the Linear kernels achieve a better cross validation performance. Polynomial kernels yield results in between Linear and RBF as expected. As models with RBF kernels tend to fit training data much more tightly than ones with Linear kernels, we believe RBF is overfitting in this case and thereby achieving a lower cross validation performance; 70% to 80% training R^2 on our data which is very subjective and highly noisy seems too high. Therefore, we decided to go with the linear kernel model with empirically optimized regularization coefficient (0.2 for Arousal and 0.5 for Valence). In addition, it is obvious in all models that Arousal is more explained by the features than Valence is. This matches our expectation since Valence is a more subjective concept than Arousal and is hard to be numerically defined.
+			</p>
+			<p>
+
+			Linear Kernel, (regularization epsilon = 0.1) <br />
+			Arousal Training R^2: 0.524 <br />
+			Valence Training R^2: 0.311<br />
+			Arousal CV MSE: 0.60 (+/- 0.14)<br />
+			Valence CV MSE: 0.74 (+/- 0.18) <br />
+			</p>
+			<p>
+
+			RBF Kernel, (regularization epsilon = 0.1)<br />
+			Arousal Training R^2: 0.788<br />
+			Valence Training R^2: 0.705<br />
+			Arousal CV MSE: 1.08 (+/- 0.32)<br />
+			Valence CV MSE: 1.08 (+/- 0.39)<br />
+			</p>
+			<p>
+			Final Model: <br />
+			Linear Kernel, (regularization epsilon = 0.2 for Arousal and 0.5 for Valence) <br />
+			Arousal Training R^2: 0.522 <br />
+			Valence Training R^2: 0.313 <br />
+			Arousal CV MSE: 0.59 (+/- 0.14) <br />
+			Valence CV MSE: 0.71 (+/- 0.12)<br />
+			</p>
+			<p>
+			Once we determined our model, we applied this model to the remaining songs in the filtered dataset by obtaining the same 9 Spotify features, assigning a valence and energy score to each song. When a user specifies the desired valence and energy of their playlist, our application performs a Euclidean nearest-neighbor search to find 10 songs closest to the valence and energy pair. The user can then add their playlist to their Spotify account and listen at their leisure.
+			</p>
+			<p>
+			We tested our model numerically as shown above, but we also noted that our playlists made sense qualitatively. A valence of 0 and an energy of 100 gives mostly heavy metal songs with a lot of screaming, while a valence of 100 and energy of 0 gives mostly relaxed, cheerful songs.
+
+			</p>
+</div>
+</body>
+</html>
