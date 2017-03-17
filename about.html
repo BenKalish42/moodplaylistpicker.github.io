@@ -55,11 +55,11 @@
 			</p>
 			<p>
 
-			In order to determine the valence and energy scores, we trained a model on a preexisting dataset. The dataset we used was a 10,000 song subset of the Million Song Dataset (MSD). Each entry in the MSD has an Echo Nest ID. AcousticBrainz labs provides a mapping from the MSD Echo Nest ID to each track,s Spotify ID, if it exists on Spotify. The All Music Guide provides genre labels for each track. Spotipy allowed us to use the Spotify API in python. Using these tools, we filtered for all the songs in the MSD subset labeled Pop/Rock that are available in the US on Spotify. We collected user-rated valence and energy scores for 200 randomly selected songs in the remaining subset by surveying Northwestern students. We used these scores to train our model. 
+			In order to determine the valence and energy scores, we trained a model on a preexisting dataset. The dataset we used was a 10,000 song subset of the Million Song Dataset (MSD)(1). Each entry in the MSD has an Echo Nest ID. AcousticBrainz labs(2) provides a mapping from the MSD Echo Nest ID to each track's Spotify ID, if it exists on Spotify. The All Music Guide(3) provides genre labels for each track. Spotipy(4) allowed us to use the Spotify API in python. Using these tools, we filtered for all the songs in the MSD subset labeled Pop/Rock that are available in the US on Spotify. We collected user-rated valence and energy scores for 200 randomly selected songs in the remaining subset by surveying Northwestern students. We used these scores to train our model. 
 
 </p>
 <p>
-			Previous work in music mood classifying on an Arousal-Valence scale has shown that Support Vector Regression (SVR) yields the best results. Therefore, we have chosen to train an SVR model for each dimension (Arousal, Valence). Our training set contains 200 A-V labeled songs and the unlabeled set contains 500 songs. For each song, we obtain the following 9 Spotify features: tempo, key, loudness, mode, danceability, speechiness, acousticness, instumentalness and liveness.
+			Previous work in music mood classifying on an Arousal-Valence scale has shown that Support Vector Regression (SVR) yields the best results(5). Therefore, we have chosen to train an SVR model for each dimension (Arousal, Valence). Our training set contains 200 A-V labeled songs and the unlabeled set contains 500 songs. For each song, we obtain the following 9 Spotify features: tempo, key, loudness, mode, danceability, speechiness, acousticness, instumentalness and liveness.
 			</p>
 			<p>
 
@@ -95,6 +95,16 @@
 			<p>
 			We tested our model numerically as shown above, but we also noted that our playlists made sense qualitatively. A valence of 0 and an energy of 100 gives mostly heavy metal songs with a lot of screaming, while a valence of 100 and energy of 0 gives mostly relaxed, cheerful songs.
 
+			</p>
+			<p>
+			(1) <a href="https://labrosa.ee.columbia.edu/millionsong/">https://labrosa.ee.columbia.edu/millionsong/</a><br />
+			(2) <a href="http://labs.acousticbrainz.org/million-song-dataset-echonest-archive">http://labs.acousticbrainz.org/million-song-dataset-echonest-archive</a><br />
+			(3) <a href="http://www.ifs.tuwien.ac.at/mir/msd/">http://www.ifs.tuwien.ac.at/mir/msd/</a><br />
+			(4) <a href="https://github.com/plamere/spotipy">https://github.com/plamere/spotipy</a><br />
+			(5) <a href="http://www.cs.cmu.edu/~rbd/papers/emotion-ismir-09.pdf">http://www.cs.cmu.edu/~rbd/papers/emotion-ismir-09.pdf</a>; <a href="https://pdfs.semanticscholar.org/a977/808a4a56d6adf0cd0bb011638ed8d2d97b99.pdf">https://pdfs.semanticscholar.org/a977/808a4a56d6adf0cd0bb011638ed8d2d97b99.pdf</a><br />
+
+			<br />
+			
 			</p>
 </div>
 </body>
